@@ -1,38 +1,149 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  background-color: #282c34;
+  font-family: "Arial", sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.game-container {
+  position: relative;
+  width: 500px; /* Width for the track and centered layout */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.track {
+  background: linear-gradient(
+    90deg,
+    grey 10%,
+    white 5%,
+    grey 10%,
+    white 5%,
+    grey 10%
+  );
+  background-size: 100% 200%;
+  width: 500px;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+}
+
+.car {
+  position: absolute;
+  top: 500px;
+  transition: left 0.2s ease; /* Smooth transitions */
+}
+
+.obstacle,
+.booster {
+  position: absolute;
+  transition: top 0.05s linear; /* Smooth transitions for obstacles and boosters */
+}
+
+.obstacle {
+  width: 50px;
+  height: 50px;
+  background-color: orange;
+  border-radius: 5px;
+  border: 3px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.booster {
+  width: 30px;
+  height: 30px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 5px rgba(0, 255, 0, 0.7);
+}
+
+.score {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   color: white;
+  font-size: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+@keyframes booster-glow {
+  0% {
+    box-shadow: 0 0 10px 5px rgba(0, 255, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(0, 255, 0, 1);
+  }
+  100% {
+    box-shadow: 0 0 10px 5px rgba(0, 255, 0, 0.5);
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.booster {
+  animation: booster-glow 1.5s infinite;
+}
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 1;
+}
+
+.play-again-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-again-button:hover {
+  background-color: #45a049;
+}
+.car-selection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 1;
+}
+
+.car-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.car-button:hover {
+  background-color: #45a049;
+}
+
+.nitro-active {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: yellow;
+  font-size: 24px;
+  z-index: 1;
 }
